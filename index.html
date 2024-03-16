@@ -11,6 +11,12 @@
     <div>Welcome to the game ROCK, PAPER, SCISSORS</div>
     <!-- BODY  -->
     <div>
+        <div class="your-score">Your Score: 0</div>
+        <div class="computer-score">Computer Score: 0</div>
+        <div class="computer-choise">Computer chose: ?</div>
+        <div class="result">...</div>
+    </div>
+    <div>
         <button class='rock'>ROCK</button>
         <button class='paper'>PAPER</button>
         <button class='scissors'>SCISSORS</button>
@@ -20,6 +26,18 @@
         const buttonPaper = document.querySelector(".paper");
         const buttonScissocrs = document.querySelector(".scissors");
 
+        const yourWins = document.querySelector(".your-score");
+        const computerWins = document.querySelector(".computer-score");
+        const computerChoise = document.querySelector(".computer-choise")
+        const result = document.querySelector(".result");
+
+        const buttons = document.querySelector("button");
+
+        function disableButtons() {
+            buttons.forEach(elem => {
+                elem.disabled = true;
+            })
+        }
 
         
         buttonRock.addEventListener("click", () => {
@@ -35,7 +53,7 @@
         })
 
 
-
+        
 
         function getComputerChoise() {
         const options = ["Rock","Paper","Scissors"];
@@ -43,67 +61,71 @@
         return options[random]
         }
 
-        // function playerChoise() {
-        //     let choise = prompt("Take your pick");
-        //     choise = choise.toLocaleLowerCase();
-        //     return choise
-        // }
-
         let computerScore = 0;
         let playerScore = 0;
 
         function playGame(playerSelection, computerSelection) {
-          // let playerSelection = playerChoise();
-         // let computerSelection = getComputerChoise().toLocaleLowerCase();
+
+            if (playerScore == 5) {
+                result.innerHTML = "You WON the game, if you want restart the game - reload this page!";
+                disableButtons()
+            } else if (computerScore == 5) {
+                result.innerHTML = "I WON the game, if you want rematch - reload this page!"
+                disableButtons()
+            }
+
+            let winFlag = false;
+
+            if (playerSelection == computerSelection) {
+                result.innerHTML = "It's a tie!";
+                computerChoise.innerHTML = `Computer chose: ${computerSelection}`;
+                return;
+            }
 
          switch (playerSelection) {
              case "Rock": 
                  if (computerSelection == "Paper") {
-                        console.log("You lost!");
-                     computerScore++;
-                 } else if (computerSelection == "Rock") {
-                     console.log("It's a tie!");
-                  } else {
-                     console.log("You win!");
-                     playerScore++;
+                        result.innerHTML = "You lost!";
+                 } else {
+                        result.innerHTML = "You win!"
+                        winFlag = true;
                   }
                  break;
 
                 case "Paper": 
-                    if (computerSelection == "Paper") {
-                        console.log("It's a tie!");
-                    } else if (computerSelection == "Rock") {
-                        console.log("You win!");
-                        playerScore++;
+                    if (computerSelection == "Rock") {
+                        result.innerHTML = "You win!"
+                        winFlag = true;
                     } else {
-                        console.log("You lost!");
-                        computerScore++;
+                        result.innerHTML = "You lost!";
                     }
                     break;
+
                 case "Scissors":
-                    if (computerSelection == "Scissors") {
-                        console.log("It's a tie!");
-                    } else if (computerSelection == "Rock") {
-                        console.log("You lost!");
-                        computerScore++;
+                    if (computerSelection == "Rock") {
+                        result.innerHTML = "You lost!";
                     } else {
-                        console.log("You win!");
-                        playerScore++;
+                        result.innerHTML = "You win!"
+                        winFlag = true;
                     }
                     break; 
-                default:
-                    console.log("You can't use this weapon, please pick up either Paper ,Scissors or Rock!");
+
+                
             }
 
-            console.log(`Computer choose ${computerSelection}`);
-            console.log(`YOUR choise was ${playerSelection}`);
-            console.log(`Computer score: ${computerScore}`);
-            console.log(`Player score ${playerScore}`);  
-        }
+            
 
-        // while (computerScore <= 4 && playerScore <= 4) {
-        // playGame();
-        // }
+            computerChoise.innerHTML = `Computer chose: ${computerSelection}`;
+            
+
+            if (winFlag) {
+                playerScore++;
+                yourWins.innerHTML = "Your score: " + playerScore;
+            } else {
+                computerScore++;
+                computerWins.innerHTML = "Computer score: " + computerScore;
+            }
+        }
 
     </script>
 </body>
