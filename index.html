@@ -5,22 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./script.js"></script>
     <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: 400;
+            background-color: rgb(206, 254, 50);
+        }
+
+        .header {
+            /* background-color: yellow; */
+            font-size: 55px;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .body, .result {
+            text-align: center;
+            font-size: 40px;
+            padding: 20px 0;
+        }
+
+        .body {
+            min-height: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 0 25px;
+        }
+
+        .rock, .paper, .scissors {
+            color: white;
+            background-color: #3882f6;
+            font-size: 60px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500px;
+            padding: 10px 20px;
+        }
+
+    </style>
 </head>
 <body>
     <!-- HERO -->
-    <div>Welcome to the game ROCK, PAPER, SCISSORS</div>
+    <div class="header">Welcome to the game: ROCK, PAPER, SCISSORS</div>
     <!-- BODY  -->
-    <div>
+    <div class="body">
         <div class="your-score">Your Score: 0</div>
         <div class="computer-score">Computer Score: 0</div>
         <div class="computer-choise">Computer chose: ?</div>
-        <div class="result">...</div>
+        
     </div>
-    <div>
-        <button class='rock'>ROCK</button>
-        <button class='paper'>PAPER</button>
-        <button class='scissors'>SCISSORS</button>
+    <div class="buttons">
+        <button class='rock'>ROCK 👊</button>
+        <button class='paper'>PAPER 🤚</button>
+        <button class='scissors'>SCISSORS ✌</button>
     </div>
+    <div class="result"> </div>
     <script>
         const buttonRock = document.querySelector(".rock");
         const buttonPaper = document.querySelector(".paper");
@@ -114,7 +165,6 @@
             }
 
             
-
             computerChoise.innerHTML = `Computer chose: ${computerSelection}`;
             
 
